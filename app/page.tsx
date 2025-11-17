@@ -3,7 +3,7 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { ArenaUser } from "./types/arenaUser";
+import { ArenaUser } from "./types";
 
 type ArenaChannel = {
   id: number;
