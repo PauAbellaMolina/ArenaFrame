@@ -36,7 +36,7 @@ export default function Home() {
   }, [queryCode, router, searchParams]);
 
   const handleAuthorize = () => {
-    window.location.href = `http://dev.are.na/oauth/authorize?client_id=R3oIzf4T7k1DRpOhrh38wbhSnAdAGwvMqrAEOKss_2k&redirect_uri=${process.env.HOST}&response_type=code`;
+    window.location.href = `http://dev.are.na/oauth/authorize?client_id=R3oIzf4T7k1DRpOhrh38wbhSnAdAGwvMqrAEOKss_2k&redirect_uri=${window.location.origin}&response_type=code`;
   };
 
   return (
