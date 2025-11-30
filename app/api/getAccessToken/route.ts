@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     }
 
     // Build redirect_uri exactly as used in the authorize step
-    const host = process.env.HOST; // e.g. myapp.example.com
+    const host = process.env.NEXT_PUBLIC_HOST; // e.g. myapp.example.com
     if (!host) {
       return Response.json({ error: "HOST env is missing" }, { status: 500 });
     }
@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     if (!clientSecret) {
       return Response.json(
         { error: "ARENA_FRAME_SECRET env is missing" },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
       });
       return Response.json(
         { error: "Token exchange failed", status: response.status, body: text },
-        { status: response.status },
+        { status: response.status }
       );
     }
 
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
     } catch {
       return Response.json(
         { error: "Invalid JSON from Arena", raw: text },
-        { status: 502 },
+        { status: 502 }
       );
     }
 
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
     if (!access_token) {
       return Response.json(
         { error: "No access_token in response", raw: json },
-        { status: 502 },
+        { status: 502 }
       );
     }
 
@@ -88,7 +88,7 @@ export async function POST(req: Request) {
     console.error("Unexpected error in getAccessToken", e);
     return Response.json(
       { error: "Unexpected error", details: String(e) },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
