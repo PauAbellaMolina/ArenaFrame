@@ -1,5 +1,3 @@
-// app/api/getAccessToken/route.ts
-
 export async function POST(req: Request) {
   try {
     const { code } = await req.json(); // expects {"code":"..."}
@@ -10,7 +8,10 @@ export async function POST(req: Request) {
     // Build redirect_uri exactly as used in the authorize step
     const host = process.env.NEXT_PUBLIC_HOST; // e.g. myapp.example.com
     if (!host) {
-      return Response.json({ error: "HOST env is missing" }, { status: 500 });
+      return Response.json(
+        { error: "NEXT_PUBLIC_HOST env is missing" },
+        { status: 500 }
+      );
     }
     const redirectUri = `https://${host}`;
 
@@ -45,16 +46,7 @@ export async function POST(req: Request) {
 
     const text = await response.text();
 
-    // Helpful logging for debugging
-    // You can remove once working
-    // Note: Do not log secrets
     if (!response.ok) {
-      // Show status + body to understand issues like 404/400
-      console.error("Token exchange failed", {
-        status: response.status,
-        statusText: response.statusText,
-        body: text,
-      });
       return Response.json(
         { error: "Token exchange failed", status: response.status, body: text },
         { status: response.status }

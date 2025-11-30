@@ -1,5 +1,3 @@
-// app/api/getChannelContents/route.ts
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const channelId = searchParams.get("channelId");
@@ -8,11 +6,16 @@ export async function GET(req: Request) {
   const auth = req.headers.get("authorization");
 
   if (!channelId)
-    return Response.json({ error: "Missing 'channelId' param" }, { status: 400 });
+    return Response.json(
+      { error: "Missing 'channelId' param" },
+      { status: 400 }
+    );
   if (!auth?.toLowerCase().startsWith("bearer "))
     return Response.json({ error: "Missing Bearer token" }, { status: 401 });
 
-  const url = `http://api.are.na/v2/channels/${encodeURIComponent(channelId)}/contents?per=${per}&page=${page}`;
+  const url = `http://api.are.na/v2/channels/${encodeURIComponent(
+    channelId
+  )}/contents?per=${per}&page=${page}`;
   const res = await fetch(url, {
     headers: {
       Accept: "application/json",

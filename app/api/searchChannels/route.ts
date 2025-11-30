@@ -1,5 +1,3 @@
-// app/api/searchUsers/route.ts
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q");

@@ -1,5 +1,3 @@
-// app/api/searchUsers/route.ts
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get("userId");
@@ -10,7 +8,9 @@ export async function GET(req: Request) {
   if (!auth?.toLowerCase().startsWith("bearer "))
     return Response.json({ error: "Missing Bearer token" }, { status: 401 });
 
-  const url = `http://api.are.na/v2/users/${encodeURIComponent(userId)}/channels`;
+  const url = `http://api.are.na/v2/users/${encodeURIComponent(
+    userId
+  )}/channels`;
   const res = await fetch(url, {
     headers: {
       Accept: "application/json",
