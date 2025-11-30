@@ -30,3 +30,14 @@ export const fetchChannelContents = async (channelId: number, page: number = 1, 
     },
   });
 };
+
+export const fetchSearchChannels = (term: string) => {
+  const accessToken = localStorage.getItem("arena-access-token")
+  return fetch(`/api/searchChannels?q=${encodeURIComponent(term)}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};

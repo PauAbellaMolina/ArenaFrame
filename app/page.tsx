@@ -1,10 +1,10 @@
-// app/page.tsx
-
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
-import Authorize from "./components/Authorize";
-import UserAndChannels from "./components/UserAndChannels";
+import { useEffect, useState } from "react";
+import AuthorizeHandler from "./components/AuthorizeHandler";
+import Main from "./components/Main";
+import AuthorizeButton from "./components/buttons/AuthorizeButton";
+import LogoutButton from "./components/buttons/LogoutButton";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -36,32 +36,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
       {arenaAccessToken && (
-        <button
-          onClick={() => {
-            localStorage.removeItem("arena-access-token");
-            localStorage.removeItem("selected-user");
-            setArenaAccessToken(null);
-          }}
-          className="fixed right-4 top-4 rounded-md border border-zinc-300 bg-white px-3 py-1 text-sm shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-        >
-          Logout
-        </button>
+        <LogoutButton setArenaAccessToken={setArenaAccessToken} />
       )}
 
       {!arenaAccessToken && !arenaCode && (
-        <div className="flex min-h-screen items-center justify-center">
-          <button
-            onClick={handleAuthorize}
-            className="rounded-md border border-zinc-300 bg-white px-4 py-2 text-sm shadow-sm hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-          >
-            Authorize
-          </button>
-        </div>
+        <AuthorizeButton handleAuthorize={handleAuthorize} />
       )}
 
       {arenaCode && !arenaAccessToken && (
         <div className="flex min-h-screen items-center justify-center">
-          <Authorize
+          <AuthorizeHandler
             onSuccess={(token) => {
               setArenaAccessToken(token);
               setArenaCode(null);
@@ -74,11 +58,7 @@ export default function Home() {
         </div>
       )}
 
-      {arenaAccessToken && (
-        <div className="pt-14">
-          <UserAndChannels accessToken={arenaAccessToken} />
-        </div>
-      )}
+      {arenaAccessToken && <Main />}
     </div>
   );
 }

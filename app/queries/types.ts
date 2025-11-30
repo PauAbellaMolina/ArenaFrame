@@ -36,6 +36,7 @@ export interface ArenaChannel {
   id: number;
   title: string;
   slug: string;
+  follower_count: number;
   length?: number;
 }
 

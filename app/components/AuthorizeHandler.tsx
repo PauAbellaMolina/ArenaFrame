@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useRef } from "react";
 
-export default function Authorize({
+export default function AuthorizeHandler({
   onSuccess,
   onFailure,
 }: {
