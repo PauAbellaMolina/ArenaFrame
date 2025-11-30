@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ArenaChannel, ArenaChannelContent } from "../queries/types";
+import { ArenaChannel, ArenaChannelContent } from "../types";
 import { fetchChannelContents } from "../queries";
 import ControlsBar from "./ControlsBar";
 import PlayButton from "./buttons/PlayButton";

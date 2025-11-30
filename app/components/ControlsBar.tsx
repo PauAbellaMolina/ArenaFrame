@@ -5,7 +5,7 @@ import {
   fetchSearchUsers,
   fetchUserChannels,
 } from "../queries";
-import { ArenaChannel, ArenaUser } from "../queries/types";
+import { ArenaChannel, ArenaUser } from "../types";
 
 export default function ControlsBar({
   propagateSelectedChannel,
