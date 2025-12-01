@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Arena Frame | Pau Abella",
-  description: "Pick a channel and let blocks play",
+  description: "A digital photo frame for Are.na blocks",
 };
 
 export default function RootLayout({
